@@ -11,3 +11,6 @@ Para listar pos diretorios no / do container
 
 Para executar um arquivo.sql no container do banco de dados com o user sa
   docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Password@123" -i /setup.sql
+
+Para copiar uma base de dados para dentro do container
+   docker cp ./setup.sql mssql:/setup.sql
