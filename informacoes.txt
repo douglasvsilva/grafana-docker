@@ -1,0 +1,13 @@
+Para baixar um dashboard do sql server para o prometheus e usar no grafana acesse:
+  https://grafana.com/grafana/dashboards/?search=ms+sql+server
+
+Comandos Importantes para Verificação
+
+Acessa o banco de dados no container com o user sa
+  docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Password@123"
+
+Para listar pos diretorios no / do container
+  docker exec -it mssql ls /
+
+Para executar um arquivo.sql no container do banco de dados com o user sa
+  docker exec -it mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Password@123" -i /setup.sql

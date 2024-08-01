@@ -1,0 +1,42 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      GF_SERVER_ADDR: "0.0.0.0:3000" # Definindo o endereço do servidor do Grafana
+      GF_SERVER_PROTOCOL: "http" # Definindo o protocolo do servidor do Grafana
+      GF_SECURITY_ADMIN_USER: "admin" # Definindo o usuário administrador do Grafana
+      GF_SECURITY_ADMIN_PASSWORD: "password" # Definindo a senha do usuário administrador do Grafana
+      GRAFANA_METRICS_ENABLED: "true" # Adicione essa variável de ambiente
+    volumes:
+      - ./grafana.ini:/etc/grafana/grafana.ini # Montando o volume com o arquivo de configuração do Grafana
+    depends_on:
+      - mssql
+      - prometheus
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    ports:
+      - 1433:1433
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password@123
+    volumes:
+      - ./sqlserver/setup.sql:/setup.sql
+   
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - /vagrant/grafana-docker-compose/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+volumes:
+  prometheus:
+  sqlserver:
+  

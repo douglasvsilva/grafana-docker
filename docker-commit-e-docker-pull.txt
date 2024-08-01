@@ -1,0 +1,29 @@
+Passos para criar uma imagem a partir de um conteiner e enviar a imagem para o dockerhub
+
+1 - Criando a imagem de um container em execução
+Sintaxe:
+  docker commit example-container example-image:latest
+
+Exemplo: container do grafana
+  docker commit grafana dougvs/doug-grafana:latest
+
+obs:
+  o nome dougvs/doug-grafana:latest está no formato aceito para fazer o pull em uma conta no dockerhub
+
+ 
+2 - Salvando a imagem em uma conta do dockerhub
+
+Fazer o login no dockerhub
+docker login
+
+obs:
+  forneceer usuario e senha da conta do dockerhub
+
+Fazer o pull da imagem para a conta do dockerhub
+  docker pull dougvs/doug-grafana:latest
+
+Fazer o logout da conexão com o dockerhub
+  docker logout
+
+obs:
+  depois verificar na conta do dockerhub a imagem salva
